@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, render_template
-from datetime import datetime
+from datetime import datetime, timezone
 import os
 import time
 
@@ -39,7 +39,7 @@ def info():
         "environment": ENVIRONMENT,
         "status": "running",
         "uptime_seconds": int(time.time() - START_TIME),
-        "timestamp": datetime.utcnow().isoformat()
+        "timestamp": datetime.now(timezone.utc).isoformat()
     })
 
 
