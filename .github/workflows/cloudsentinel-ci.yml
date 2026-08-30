@@ -1,0 +1,25 @@
+name: CloudSentinel CI
+
+on:
+  push:
+    branches:
+      - main
+      - cloudsentinel-dev
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Test Application
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t cloudsentinel:test .
+
+      - name: Run tests
+        run: docker run --rm cloudsentinel:test pytest -q
