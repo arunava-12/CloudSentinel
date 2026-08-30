@@ -9,7 +9,23 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Scan repository for secrets
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   test:
     name: Test Application
     runs-on: ubuntu-latest
@@ -23,3 +39,13 @@ jobs:
 
       - name: Run tests
         run: docker run --rm cloudsentinel:test pytest -q
+
+      - name: Scan Docker image
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: cloudsentinel:test
+          format: table
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
