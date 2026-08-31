@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Scan repository for secrets
         uses: gitleaks/gitleaks-action@v2
@@ -32,7 +32,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Build Docker image
         run: docker build -t cloudsentinel:test .
@@ -41,11 +41,11 @@ jobs:
         run: docker run --rm cloudsentinel:test pytest -q
 
       - name: Scan Docker image
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: cloudsentinel:test
           format: table
-          exit-code: '0'    # informational: report CVEs but don't fail the build
+          exit-code: '0'
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
