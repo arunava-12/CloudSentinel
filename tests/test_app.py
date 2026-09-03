@@ -6,7 +6,7 @@ def test_home_page():
     response = client.get("/")
 
     assert response.status_code == 200
-    assert b"CloudSentinel" in response.data
+    assert b"CodeShield" in response.data
 
 
 def test_health_check():
@@ -29,5 +29,5 @@ def test_api_info():
 
     data = response.get_json()
 
-    assert data["application"] == "CloudSentinel"
+    assert data["application"] == "CodeShield"
     assert data["status"] == "running"

@@ -34,7 +34,7 @@ def health():
 @app.route("/api/info")
 def info():
     return jsonify({
-        "application": "CloudSentinel",
+        "application": "CodeShield",
         "version": VERSION,
         "environment": ENVIRONMENT,
         "status": "running",

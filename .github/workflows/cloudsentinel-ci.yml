@@ -1,4 +1,4 @@
-name: CloudSentinel CI
+name: CodeShield CI
 
 on:
   push:
@@ -35,15 +35,15 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Build Docker image
-        run: docker build -t cloudsentinel:test .
+        run: docker build -t codeshield:test .
 
       - name: Run tests
-        run: docker run --rm cloudsentinel:test pytest -q
+        run: docker run --rm codeshield:test pytest -q
 
       - name: Scan Docker image
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          image-ref: cloudsentinel:test
+          image-ref: codeshield:test
           format: table
           exit-code: '0'
           ignore-unfixed: true
