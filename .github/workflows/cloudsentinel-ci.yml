@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - cloudsentinel-dev
+      - codeshield-dev
   pull_request:
     branches:
       - main
