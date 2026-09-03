@@ -1,9 +1,5 @@
-resource "random_id" "bucket_suffix" {
-  byte_length = 4
-}
-
 resource "aws_s3_bucket" "assets" {
-  bucket = "${var.project_name}-assets-${random_id.bucket_suffix.hex}"
+  bucket = "aws-terraform-starter-assets-602d1e23"
 
   tags = {
     Name    = "${var.project_name}-assets"

@@ -48,7 +48,7 @@ resource "aws_security_group" "web" {
 }
 
 resource "aws_instance" "web" {
-  ami                    = data.aws_ami.amazon_linux_2023.id
+  ami                    = "ami-0c562b0a28fe197f3"
   instance_type          = var.instance_type
   subnet_id              = aws_subnet.public.id
   vpc_security_group_ids = [aws_security_group.web.id]
